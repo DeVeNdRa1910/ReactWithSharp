@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import './App.css'
-import ExpenseItem from './components/ExpenseItem'
+import ExpenseDate from './components/ExpenseDate'
 import ExpenseDetails from './components/ExpenseDetails'
 
 function App() {
@@ -10,28 +10,28 @@ function App() {
     {
       id: 1,
       title: "car insurance",
-      date: "2024-2-21",
+      date: new Date(2024, 2, 21),
       amount: "8999/-",
       location: "BHOPAL"
     },
     {
       id: 2,
       title: "Grocery",
-      date: "2024-2-5",
+      date: new Date(2024, 2, 5),
       amount: "10999/-",
       location: "BHOPAL"
     },
     {
       id: 3,
       title: "petrol",
-      date: "2024-2-10",
+      date: new Date(2024, 2, 10),
       amount: "899/-",
       location: "INDORE"
     },
     {
       id: 4,
       title: "petrentrol",
-      date: "2024-2-1",
+      date: new Date(2024, 2, 1),
       amount: "4999/-",
       location: "Bangluru"
     }
@@ -43,7 +43,7 @@ function App() {
       {
         expensesArr.map(exp=>(
           <>
-            <ExpenseItem location={exp.location} date={exp.date} />
+            <ExpenseDate location={exp.location} date={exp.date} />
             <ExpenseDetails title={exp.title} amount={exp.amount} />
           </>
         ))

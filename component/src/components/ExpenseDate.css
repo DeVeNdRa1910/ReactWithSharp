@@ -8,7 +8,11 @@
     border-radius: 12px;
     background-color: #4b4b4b;
   }
-  
+  .date{
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 5px;
+  }
   .expense-item__description {
     display: flex;
     flex-direction: column;
