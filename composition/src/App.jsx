@@ -26,6 +26,12 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+  const [items , setItem] = useState(expenses)
+
+  function deleteTitle(id){
+    const updateItems = items.filter(item => item.id!==id)
+    setItem(updateItems);
+  }
 
   return (
     <div>
