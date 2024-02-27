@@ -29,9 +29,17 @@ function App() {
   ];
 
 
+  function onAddHandler(expense){
+    // const newDataList = [
+    //   ...expenses,
+    //   expense
+    // ]
+    console.log("In App.jsx");
+    console.log(expense);
+  }
   return (
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense={onAddHandler}/>
       <Expense items={expenses} />
     </div>
   );
