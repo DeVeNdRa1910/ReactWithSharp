@@ -6,7 +6,7 @@ import Expense from './components/Expenses/Expense'
 import NewExpense from './components/newExpense/NewExpense'
 
 function App() {
-  const expenses = [
+    const [expenses, setExpenses] = useState([
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -26,18 +26,12 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
-  ];
+  ])
 
 
   function onAddHandler(expense){
 
-    // const newDataList = [
-    //   ...expenses,
-    //   expense
-    // ]
-    
-    console.log("In App.jsx");
-    console.log(expense);
+    setExpenses(prevExpenses => [...prevExpenses, expense]);
   }
   return (
     <div>
