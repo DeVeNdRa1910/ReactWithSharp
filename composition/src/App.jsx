@@ -28,11 +28,10 @@ function App() {
     },
   ])
 
-
   function onAddHandler(expense){
-
-    setExpenses(prevExpenses => [...prevExpenses, expense]);
+    setExpenses(prevExpenses => [expense , ...prevExpenses]);
   }
+
   return (
     <div>
       <NewExpense onAddExpense={onAddHandler}/>
