@@ -3,6 +3,7 @@ import './Expense.css'
 import ExpenseItem from './ExpenseItem'
 import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter';
+import ExpensesChart from './ExpensesChart';
 
 function Expense(props) {
   // props.items.foeEach((expense) => { // Use map instead of forEach
@@ -22,7 +23,7 @@ function Expense(props) {
   return (
     <Card className="expenses">
       <ExpenseFilter selected={filteredYear} onApplyFilter={filterChangeHandler} />
-
+      <ExpensesChart expenses={filteredExpenses} />
       {/* {
         filteredExpenses.length === 0 ? <h2>No expenses found.</h2> : filteredExpenses.map((expense) => ( // Use map instead of forEach
         <ExpenseItem
