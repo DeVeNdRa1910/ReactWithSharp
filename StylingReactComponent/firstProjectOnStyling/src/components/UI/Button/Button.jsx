@@ -3,10 +3,13 @@ import React from 'react';
 import './Button.css';
 
 const Button = props => {
+  const isValid = props.validity
   return (
-    <button type={props.type}  onClick={props.onClick}>
-      {props.children}
-    </button>
+    <div  className={`btn ${!isValid ? 'invalid' : ''}`} >
+      <button type={props.type}  onClick={props.onClick}>
+        {props.children}
+      </button>
+    </div>
   );
 };
 
