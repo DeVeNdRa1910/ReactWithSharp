@@ -10,22 +10,6 @@ function App() {
   const [isEditable, setIsEditable] = useState(false);
   const [editedStudent, setEditedStudent] = useState({});
 
-  // useEffect(() => {
-  //   let studentObj = localStorage.getItem("students");
-  //   if (studentObj) {
-  //     let std = JSON.parse(localStorage.getItem("students"));
-  //     setStudents(std);
-  //     setStudentCount(std.length)
-  //     console.log(std);
-  //     console.log(std.length);
-  //   }
-  // }, []);
-
-  //save data in local storage
-  // const saveToLS = (params) => {
-  //   localStorage.setItem("students", JSON.stringify(students));
-  // };
-
   const addStudent = (e) => {
     e.preventDefault();
     if(studentName.length < 4 || studentPhone === "" || studentAddress === ""){
@@ -46,7 +30,6 @@ function App() {
     setStudentName("");
     setStudentPhone("");
     setStudentAddress("");
-    // saveToLS();
     console.log(students);
   }
 
@@ -54,7 +37,6 @@ function App() {
     const newStudents = students.filter((item) => item.id !== id);
     setStudents(newStudents);
     setStudentCount(studentCount-1);
-    // saveToLS();
     console.log(students);
   }
 
@@ -67,7 +49,6 @@ function App() {
     setStudentAddress(std.address)
     setIsEditable(true);
     handleDelete(id)
-    // saveToLS()
   };
 
   const handleSubmitEdit = (e) => {
