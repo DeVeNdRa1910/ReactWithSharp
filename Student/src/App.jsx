@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
@@ -10,28 +10,9 @@ function App() {
   const [isEditable, setIsEditable] = useState(false);
   const [editedStudent, setEditedStudent] = useState({});
 
-  // useEffect(() => {
-  //   let studentObj = localStorage.getItem("students");
-  //   if (studentObj) {
-  //     let std = JSON.parse(localStorage.getItem("students"));
-  //     setStudents(std);
-  //     setStudentCount(std.length)
-  //     console.log(std);
-  //     console.log(std.length);
-  //   }
-  // }, []);
-
-  //save data in local storage
-  // const saveToLS = (params) => {
-  //   localStorage.setItem("students", JSON.stringify(students));
-  // };
-
+ 
   const addStudent = (e) => {
     e.preventDefault();
-    if(studentName.length < 4 || studentPhone === "" || studentAddress === ""){
-      alert("Pleas enter valid Data");
-      return;
-    }
     const newStudent = {
       id: uuidv4(),
       name: studentName,
@@ -46,7 +27,7 @@ function App() {
     setStudentName("");
     setStudentPhone("");
     setStudentAddress("");
-    // saveToLS();
+    setStudent({})
     console.log(students);
   }
 
@@ -54,20 +35,14 @@ function App() {
     const newStudents = students.filter((item) => item.id !== id);
     setStudents(newStudents);
     setStudentCount(studentCount-1);
-    // saveToLS();
     console.log(students);
   }
 
   const handleEdit = (id) => {
     const std = students.find((item) => item.id === id);
     setEditedStudent(std);
-    console.log(std);
-    setStudentName(std.name);
-    setStudentPhone(std.phone);
-    setStudentAddress(std.address)
     setIsEditable(true);
     handleDelete(id)
-    // saveToLS()
   };
 
   const handleSubmitEdit = (e) => {
@@ -124,7 +99,7 @@ function App() {
           <h1 className='flex justify-center text-4xl'>Studets Information</h1>
           <div>
             {students.map((item) => (
-              <div key={item.id} className='flex justify-between border-2 rounded-xl my-4 py-2 '>
+              <div key={item.id} className='flex justify-between w-4/5 ml-28 border-2 rounded-xl my-4 py-2 '>
                 <h3 className='pl-2'>
                   {item.name} , {item.phone} , {item.address}
                 </h3>
