@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './App.css'
+import Header from './Components/Layout/Header'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [productCount, setProductCount] = useState(0) 
   return (
     <>
       <div>
-        <h2>Lets get Started</h2>
+        <Header numberOfProduct={productCount}/>
       </div>
     </>
   )
