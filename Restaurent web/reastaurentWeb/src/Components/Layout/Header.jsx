@@ -1,4 +1,6 @@
 import React from 'react'
+import mealsImage from '../../assets/foodImage.png'
+
 
 function Header(props) {
 
@@ -13,7 +15,7 @@ function Header(props) {
             </div>
         </header>
         <div >
-            <img className='w-full min-h-32 max-h-40 bg-fixed ' src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+            <img className='w-full max-h-3/6 bg-fixed z-0 bg-fixed' src={mealsImage} alt="" />
         </div>
     </div>
   )
