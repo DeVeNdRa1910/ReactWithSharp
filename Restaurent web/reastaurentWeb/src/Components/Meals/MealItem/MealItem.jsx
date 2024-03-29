@@ -3,6 +3,7 @@ import MEalItemForm from './MEalItemForm'
 
 function MealItem(props) {
     const price = `${props.price}₹`
+    //make food item visible
   return (
     <li className='flex justify-between border-b-2'>
       <div className='pt-3 pb-1 rounded-xl '>
