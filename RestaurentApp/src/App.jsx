@@ -6,11 +6,20 @@ import Cart from './Components/Cart/Cart'
 
 function App() {
   const [productCount, setProductCount] = useState(0)
+  const [cartIsShown, setCartIsShown] = useState(false)
+
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  }
+
+  const hideCartHandler = () => {
+    setCartIsShown(false)
+  }
 
   return (
     <>
-      <Cart />
-      <Header numberOfProduct={productCount}/>
+      {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
+      <Header numberOfProduct={productCount} onShowCart={showCartHandler}/>
       <main>
         <Meals />
       </main>

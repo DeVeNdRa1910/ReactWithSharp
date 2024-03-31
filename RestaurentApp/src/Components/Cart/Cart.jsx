@@ -11,9 +11,9 @@ function Cart(props) {
             <span>597₹</span>
         </div>
         <div className='text-right'>
-            <div className=' flex justify-evenly text-black cursor-pointer bg-transparent border border-orange-800 py-2 px-8 rounded-2xl ml-4' >
-                <button className='border rounded-xl bg-orange-800 text-white px-8 py-1 mx-2 hover:shadow-2xl hover:bg-orange-900'>Close</button>
-                <button className='border rounded-xl bg-orange-800 text-white px-8 py-1 mx-2 hover:shadow-2xl hover:bg-orange-900'>Order</button>
+            <div className='text-black cursor-pointer bg-transparent py-2 px-8 rounded-2xl ml-4' >
+                <button onClick={props.onHideCart} className='border-2 rounded-xl text-orange-800 bg-white px-8 py-1 mx-2 hover:shadow-2xl hover:bg-slate-200'>Close</button>
+                <button className='border-2 rounded-xl bg-orange-800 text-white px-8 py-1 mx-2 hover:shadow-2xl hover:bg-orange-900'>Order</button>
             </div>
         </div>
     </Modal>
