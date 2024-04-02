@@ -1,12 +1,12 @@
 import React from 'react'
 
-function InputField(props) {
+const InputField = React.forwardRef((props, ref) => {
   return (
     <div>
       <label className='mr-2' htmlFor={props.input.id}>{props.label}</label>
-      <input {...props.input} className='bg-slate-200 py-2 px-2 rounded-2xl shadow-2xl border-2 hover:border-black'/>
+      <input ref={ref} {...props.input} className='bg-slate-200 py-2 px-2 rounded-2xl shadow-2xl border-2 hover:border-black'/>
     </div>
   )
-}
+})
 
 export default InputField

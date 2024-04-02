@@ -3,9 +3,9 @@ import './App.css'
 import Header from './Components/Layout/Header'
 import Meals from './Components/Meals/Meals'
 import Cart from './Components/Cart/Cart'
+import CartContextProvider from './store/CartProvider'
 
 function App() {
-  const [productCount, setProductCount] = useState(0)
   const [cartIsShown, setCartIsShown] = useState(false)
 
   const showCartHandler = () => {
@@ -17,13 +17,13 @@ function App() {
   }
 
   return (
-    <>
+    <CartContextProvider>
       {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
-      <Header numberOfProduct={productCount} onShowCart={showCartHandler}/>
+      <Header onShowCart={showCartHandler}/>
       <main>
         <Meals />
       </main>
-    </>
+    </CartContextProvider>
   )
 }
 
