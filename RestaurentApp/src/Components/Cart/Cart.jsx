@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from '../UI/Modal'
 import { useContext } from 'react'
 import CartContext from '../../store/cartContext'
-
+import CartItem from './CartItem'
 
 function Cart(props) {
     const cartCtx = useContext(CartContext)
@@ -13,9 +13,20 @@ function Cart(props) {
 
     console.log(totalAmount);
 
+    const cartItemRemoveHandler = (id) => {
+        cartCtx.removeItem(id)
+    }
+
+    const cartItemAddHandler = (item) => {
+        cartCtx.addItem({...item, amount:1})
+    }
+
   return (
     <Modal onClose={props.onHideCart}>
-        <ul className='list-none m-0 p-0 max-h-80 overflow-auto'>{cartCtx.items.map((item) => (<li key={item.id}>{item.name} ₹{item.price}x{item.amount}</li>))}</ul>
+        <ul className='list-none m-0 p-0 max-h-80 overflow-scroll'>{cartCtx.items.map((item) => {
+            console.log("inside cart item" , item);
+            return (<CartItem key={item.id} name={item.name} amount={item.amount} price={item.price} onRemove={cartItemRemoveHandler.bind(null, item.id)} onAdd={cartItemAddHandler.bind(null, item)}/>)
+        })}</ul>
         <div className='flex justify-between items-center font-bold text-2xl m-1'>
             <span>Total Amount</span>
             <span>{totalAmount}₹</span>
