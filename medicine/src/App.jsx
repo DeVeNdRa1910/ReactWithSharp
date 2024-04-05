@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import AvailableMedicines from './Components/Medicines/AvailableMedicines'
+import Medicines from './Components/Medicines/Medicines'
+import CartContextProvider from './store/CartProvider'
+import Header from './Components/UI/Header'
+import { useState } from 'react'
+import Cart from './Components/Cart/Cart'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [cartIsShown, setCartIsShown] = useState(false)
+
+  const showCartHandler = () => {
+    setCartIsShown(true)
+  }
+
+  const hideCartHandler = () => {
+    setCartIsShown(false)
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <CartContextProvider>
+      {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
+      <Header onShowCart={showCartHandler}/>
+      <main>
+        <Medicines />
+      </main>
+    </CartContextProvider>
   )
 }
 
