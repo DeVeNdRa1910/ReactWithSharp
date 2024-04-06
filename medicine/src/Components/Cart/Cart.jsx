@@ -1,10 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import CartItem from './CartItem'
 import CartContext from '../../store/CartContext'
 import Modal from '../UI/Modal'
+import MedContext from '../../store/MedicineContext/medicineContext'
 
 function Cart(props) {
     const cartCtx = useContext(CartContext)
+
+    const medCtx = useContext(MedContext)
 
     const totalAmount = cartCtx.totalAmount
 
@@ -12,11 +15,53 @@ function Cart(props) {
 
     const cartItemRemoveHandler = (id) => {
         cartCtx.removeItem(id)
+
+        const medIndex = medCtx.meds.findIndex((tab)=> tab.id===id);
+        const med = medCtx.meds[medIndex];
+        if(med.quantityAvailable === 0){
+          alert("Out Of Stock ! Coming Soon");
+          return
+        }
+        const updatedQuantity = med.quantityAvailable+1;
+
+        const updatedMed = {...med,  quantityAvailable: updatedQuantity};
+
+        const updatedMeds = [...medCtx.meds]
+
+        updatedMeds[medIndex] = updatedMed;
+
+        // console.log(updatedMeds[medIndex]);
+
+        medCtx.meds = [...updatedMeds];
+
+        // console.log(medCtx.meds[medIndex]);
+      }
+      
+      const cartItemAddHandler = (item) => {
+        cartCtx.addItem({...item, quantity:1})
+
+
+        const medIndex = medCtx.meds.findIndex((tab)=> tab.id===item.id);
+        const med = medCtx.meds[medIndex];
+        if(med.quantityAvailable === 0){
+          alert("Out Of Stock ! Coming Soon");
+          return
+        }
+        const updatedQuantity = med.quantityAvailable-1;
+
+        const updatedMed = {...med,  quantityAvailable: updatedQuantity};
+
+        const updatedMeds = [...medCtx.meds]
+
+        updatedMeds[medIndex] = updatedMed;
+
+        // console.log(updatedMeds[medIndex]);
+
+        medCtx.meds = [...updatedMeds];
+
+        // console.log(medCtx.meds[medIndex]);
     }
 
-    const cartItemAddHandler = (item) => {
-        cartCtx.addItem({...item, quantity:1})
-    }
 
   return (
     <Modal onClose={props.onHideCart}>

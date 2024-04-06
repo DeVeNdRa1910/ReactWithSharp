@@ -10,7 +10,6 @@ function Header(props) {
       return currNumber+item.quantity
     } , 0)
 
-    console.log(numberOfCartItems + " inside Header.jsx");
   return (
     <div>
       <header className='flex justify-around py-1 bg-slate-400 sticky top-0 z-50'>

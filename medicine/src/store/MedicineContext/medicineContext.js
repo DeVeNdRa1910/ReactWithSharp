@@ -66,8 +66,8 @@ const MedContext = React.createContext({
                 quantityAvailable: 56
             }
         ],
-        addMed: (item)=>{},
-        removeMed: (item)=>{}
+        addMed: (id)=>{},
+        removeMed: (id)=>{},
     }
 )
 

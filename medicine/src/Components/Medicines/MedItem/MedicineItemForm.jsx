@@ -1,6 +1,7 @@
 import React , {useRef, useState} from 'react'
 import InputField from '../../UI/InputField'
 
+
 function MedicineItemForm(props) {
 
     const [isQuantityValid, setIsQuantityValid] = useState(true)
@@ -35,7 +36,7 @@ function MedicineItemForm(props) {
         defaultValue: '1'
       }}
       />
-      <button className='bg-gray-500 text-white my-4 w-full rounded-xl shadow-2xl border-2 hover:border-black'>+ ADD </button>
+      <button className='bg-gray-500 text-white my-4 w-full rounded-xl shadow-2xl border-2 hover:border-black'>ADD TO CART</button>
       {!isQuantityValid && <p className='text-red-700'> Please enter a valid number</p>}
     </form>
   )
