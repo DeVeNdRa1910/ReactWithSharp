@@ -11,8 +11,8 @@ function Header(props) {
   return (
     <nav className='flex justify-between items-center mb-0.5 bg-black text-white w-full sticky'>
       <div className='flex justify-between px-10 py-2'>
-        <NavLink to="/" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>HOME</NavLink>
-        <NavLink to="/store" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>STORE</NavLink>
+        <NavLink to="/music" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>HOME</NavLink>
+        <NavLink to="/" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>STORE</NavLink>
         <NavLink to="/about" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>ABOUT</NavLink>
       </div>
       <div className='flex justify-end mr-12'>

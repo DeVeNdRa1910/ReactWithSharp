@@ -1,10 +1,12 @@
 import {createBrowserRouter, RouterProvider, createRoutesFromElements, Route} from 'react-router-dom'
 import About from './Components/about/About'
 import Home from './Home'
+import Music from './Components/Music/Music'
 
 const router = createBrowserRouter([
   {path: '/about', element: <About />},
   {path: '/', element: <Home />},
+  {path: '/music', element: <Music />},
 ])
 
 
