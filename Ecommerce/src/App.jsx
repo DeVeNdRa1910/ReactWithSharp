@@ -1,36 +1,30 @@
-import { useState } from 'react'
-import './App.css'
-import AvailableProduct from './Components/Products/AvailableProduct'
-import Header from './Components/UI/Header'
-import CartContextProvider from './store/Cart/CartProvider'
-import Cart from './Components/Cart/Cart'
+import {createBrowserRouter, RouterProvider, createRoutesFromElements, Route} from 'react-router-dom'
+import About from './Components/about/About'
+import Home from './Home'
 
-function App() {
-  
-  const [cartIsShown, setCartIsShown] = useState(false);
+const router = createBrowserRouter([
+  {path: '/about', element: <About />},
+  {path: '/', element: <Home />},
+])
 
-  const showCartHandler = () => {
-    setCartIsShown(true);
-  }
 
-  const hideCartHandler = () => {
-    setCartIsShown(false);
-  }
+// this is another way to create routing
 
-  return (
-    <CartContextProvider>
-      <div className=''>
-        {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
-        <Header onShowCart={showCartHandler}/>
-      </div>
-      <div className='bg-gray-600 text-white'>
-        <h1 className='text-white py-10 pt-10 text-8xl text-center'>The Generics</h1>
-      </div>
-      <main className='z-0'>
-        < AvailableProduct />
-      </main>
-    </CartContextProvider>
-  )
+// const routeDefinations = createRoutesFromElements(
+//   <Route>
+//     <Route path='/' element={<Home />} />
+//     <Route path='/about' element={<About />} />
+//   </Route>
+// )
+// const router = createBrowserRouter(routeDefinations)
+
+
+
+function Rout () {
+
+    return (
+        <RouterProvider router={router} />
+    )
 }
 
-export default App
+export default Rout;

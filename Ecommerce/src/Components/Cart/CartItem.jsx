@@ -8,7 +8,7 @@ function CartItem(props) {
             <h2 className='text-xl font-semibold'>{props.name}</h2>
         </div>
         <div>
-            <span className='text-lg font-bold'>{props.price}₹</span>
+            <span className='text-lg font-bold'>{props.quantity * props.price}₹</span>
             
         </div>
         <div>
