@@ -1,34 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import AvailableProduct from './Components/Products/AvailableProduct'
+import Header from './Components/UI/Header'
+import CartContextProvider from './store/Cart/CartProvider'
+import Cart from './Components/Cart/Cart'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  const [cartIsShown, setCartIsShown] = useState(false);
+
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  }
+
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <CartContextProvider>
+      <div className=''>
+        {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
+        <Header onShowCart={showCartHandler}/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className='bg-gray-600 text-white'>
+        <h1 className='text-white py-10 pt-10 text-8xl text-center'>The Generics</h1>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <main className='z-0'>
+        < AvailableProduct />
+      </main>
+    </CartContextProvider>
   )
 }
 
