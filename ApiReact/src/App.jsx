@@ -6,6 +6,7 @@ function App() {
   
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   /* then catch syntax */
   // function fetchMoviesHandler() {
@@ -32,9 +33,16 @@ function App() {
   /* async await syntax */
   async function fetchMoviesHandler() {
     setIsLoading(true);
+    setError(null);
     try {
-      const resp = await fetch('https://swapi.dev/api/films/');
+      const resp = await fetch('https://swapi.dev/api/film/');
+      
+      if(!resp.ok){
+        throw new Error('Something went wrong!')
+      }
+      
       const data = await resp.json();
+      
       const transformedMovies = data.results.map(item => {
         return {
           id: item.episode_id,
@@ -45,13 +53,14 @@ function App() {
         }
       })
       setMovies(transformedMovies);
-      setIsLoading(false)
     } catch (err) {
+      setError(err.message);
       console.error(err);
     }
+    setIsLoading(false)
   }
 
-  console.log(movies);
+  //console.log(movies);
 
   return (
     <>
@@ -62,8 +71,11 @@ function App() {
       </div>
       <div className='flex justify-around text-center text-black w-4/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
         <section>
-          {!isLoading && <MoviesList movies={movies}/>}
+          {!isLoading && movies.length > 0 && <MoviesList movies={movies}/>}
+          {!isLoading && movies.length === 0 && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Error 404 : Movies Not found</h1>}
+          {!isLoading && error && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'> {error} </h1>}
           {isLoading && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Loading...</h1>}
+
         </section>
       </div>
     </>
