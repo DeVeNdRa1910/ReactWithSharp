@@ -4,8 +4,10 @@ import MoviesList from './Components/MoviesList'
 
 function App() {
   
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
+  /* then catch syntax */
   // function fetchMoviesHandler() {
   //   fetch('https://swapi.dev/api/films/')
   //     .then(resp => resp.json())
@@ -24,7 +26,12 @@ function App() {
   //     .catch(err => console.error(err))
   // }
 
+
+
+
+  /* async await syntax */
   async function fetchMoviesHandler() {
+    setIsLoading(true);
     try {
       const resp = await fetch('https://swapi.dev/api/films/');
       const data = await resp.json();
@@ -38,11 +45,10 @@ function App() {
         }
       })
       setMovies(transformedMovies);
+      setIsLoading(false)
     } catch (err) {
       console.error(err);
     }
-    const resp = await fetch('https://swapi.dev/api/films/');
-    const data = await resp.json();
   }
 
   console.log(movies);
@@ -56,7 +62,8 @@ function App() {
       </div>
       <div className='flex justify-around text-center text-black w-4/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
         <section>
-          <MoviesList movies={movies}/>
+          {!isLoading && <MoviesList movies={movies}/>}
+          {isLoading && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Loading...</h1>}
         </section>
       </div>
     </>
