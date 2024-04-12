@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import MoviesList from './Components/MoviesList'
 
 function App() {
@@ -30,12 +30,15 @@ function App() {
 
 
 
+
+
+
   /* async await syntax */
-  async function fetchMoviesHandler() {
+  const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const resp = await fetch('https://swapi.dev/api/film/');
+      const resp = await fetch('https://swapi.dev/api/films/');
       
       if(!resp.ok){
         throw new Error('Something went wrong!')
@@ -58,7 +61,29 @@ function App() {
       console.error(err);
     }
     setIsLoading(false)
-  }
+
+    // Another Method
+/*     let content;
+    if(!isLoading && movies.length > 0 ){
+      content = <MoviesList movies={movies}/>
+    }
+
+    if(!isLoading && movies.length === 0 && !error ){
+      content = <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Error 404 : Movies Not found</h1>;
+    }
+
+    if(!isLoading && error ) {
+      content = <h1 className='text-blue-500 text-5xl py-10 font-extrabold'> {error} </h1>;
+    }
+
+    if(isLoading){
+      content = <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Loading...</h1>
+    } */
+  }, []);
+
+  useEffect(()=>{
+    fetchMoviesHandler();
+  } , [fetchMoviesHandler]);
 
   //console.log(movies);
 
@@ -72,7 +97,7 @@ function App() {
       <div className='flex justify-around text-center text-black w-4/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
         <section>
           {!isLoading && movies.length > 0 && <MoviesList movies={movies}/>}
-          {!isLoading && movies.length === 0 && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Error 404 : Movies Not found</h1>}
+          {!isLoading && movies.length === 0 && !error && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Movies Not found</h1>}
           {!isLoading && error && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'> {error} </h1>}
           {isLoading && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Loading...</h1>}
 
