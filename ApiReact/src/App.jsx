@@ -1,6 +1,7 @@
 import './App.css'
 import { useCallback, useEffect, useState } from 'react'
 import MoviesList from './Components/MoviesList'
+import AddMovie from './Components/AddMovie';
 
 function App() {
   
@@ -38,7 +39,7 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const resp = await fetch('https://swapi.dev/api/films/');
+      const resp = await fetch('https://reacthttp-97eeb-default-rtdb.firebaseio.com/movies.json');
       
       if(!resp.ok){
         throw new Error('Something went wrong!')
@@ -89,6 +90,9 @@ function App() {
 
   return (
     <>
+      <div className='flex justify-around text-center w-4/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
+        <AddMovie />
+      </div>
       <div className='flex justify-around text-center w-4/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
         <section className='w-full'>
           <button onClick={fetchMoviesHandler} className='rounded-xl bg-blue-600 text-white px-12 py-2 m-4'>Fetch Movies</button>
