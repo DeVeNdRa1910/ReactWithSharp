@@ -10,19 +10,19 @@ function AddMovie(props) {
         event.preventDefault();
 
         const movie = {
-            title: titleRef.current.valueOf,
-            director: directorRef.current.valueOf,
-            openingText: openingTextRef.current.valueOf,
-            releaseDate: releaseDateRef.current.valueOf,
+            title: titleRef.current.value,
+            director: directorRef.current.value,
+            openingText: openingTextRef.current.value,
+            releaseDate: releaseDateRef.current.value,
         };
 
         props.onAddMovie(movie);
 
         // Clear input fields after submission
-        titleRef.current.valueOf = '';
-        directorRef.current.valueOf = '';
-        openingTextRef.current.valueOf = '';
-        releaseDateRef.current.valueOf = '';
+        titleRef.current.value = '';
+        directorRef.current.value = '';
+        openingTextRef.current.value = '';
+        releaseDateRef.current.value = '';
     }
 
     return (
