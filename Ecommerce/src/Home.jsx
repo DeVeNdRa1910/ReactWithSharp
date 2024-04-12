@@ -4,6 +4,9 @@ import AvailableProduct from './Components/Products/AvailableProduct'
 import Header from './Components/UI/Header'
 import CartContextProvider from './store/Cart/CartProvider'
 import Cart from './Components/Cart/Cart'
+import Footer from './Components/UI/Footer'
+
+
 
 
 function Home() {
@@ -32,6 +35,7 @@ function Home() {
         <main className='z-0'>
           < AvailableProduct />
         </main>
+        <Footer />
       </CartContextProvider>
   )
 }

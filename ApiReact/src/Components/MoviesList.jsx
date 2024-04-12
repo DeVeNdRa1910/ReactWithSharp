@@ -9,7 +9,7 @@ function MoviesList(props) {
             props.movies.map(item => {
                 return (
                     <div key={item.id}>
-                        <Movie  id={item.id} title={item.title} director={item.director} releaseDate={item.release_date} openingCrawl={item.opening_crawl}/>
+                        <Movie id={item.id} title={item.title} director={item.director} releaseDate={item.release_date} openingCrawl={item.opening_crawl}/>
                     </div>
                 )
             })

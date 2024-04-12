@@ -141,7 +141,7 @@ function App() {
       </div>
       <div className='flex justify-around text-center text-black w-3/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
         <section className='w-4/5'>
-          {!isLoading && movies.length > 0 && <MoviesList movies={movies}/>}
+          {!isLoading && movies.length > 0 && <MoviesList movies={movies} changeMovies={setMovies}/>}
           {!isLoading && movies.length === 0 && !error && <h1 className='text-blue-500 text-5xl py-10 font-extrabold'>Movies Not found</h1>}
           {!isLoading && error && <h1 className='text-blue-500 text-4xl py-10 font-extrabold'> {error} </h1>}
           {isLoading && <h1 className='text-blue-500 text-4xl py-10 font-extrabold'>Loading...</h1>}

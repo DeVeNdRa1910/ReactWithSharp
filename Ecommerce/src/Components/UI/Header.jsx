@@ -14,6 +14,7 @@ function Header(props) {
         <NavLink to="/music" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>HOME</NavLink>
         <NavLink to="/" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>STORE</NavLink>
         <NavLink to="/about" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>ABOUT</NavLink>
+        <NavLink to="/contactUs" className='px-3 mx-2 border border-black hover:border-white hover:rounded-xl'>CONTACT-US</NavLink>
       </div>
       <div className='flex justify-end mr-12'>
         <button onClick={props.onShowCart} className='mr-2 px-4 py-1 my-2 border-2 border-blue-400 rounded-xl hover:border-blue-600 shadow-xl'>CART</button>
