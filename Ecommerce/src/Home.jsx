@@ -6,9 +6,6 @@ import CartContextProvider from './store/Cart/CartProvider'
 import Cart from './Components/Cart/Cart'
 import Footer from './Components/UI/Footer'
 
-
-
-
 function Home() {
   
   const [cartIsShown, setCartIsShown] = useState(false);

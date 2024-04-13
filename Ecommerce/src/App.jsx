@@ -12,6 +12,7 @@ const router = createBrowserRouter([
 ])
 
 
+
 // this is another way to create routing
 
 // const routeDefinations = createRoutesFromElements(
@@ -27,7 +28,9 @@ const router = createBrowserRouter([
 function Rout () {
 
     return (
-        <RouterProvider router={router} />
+        <div>
+          <RouterProvider router={router} />
+        </div>
     )
 }
 

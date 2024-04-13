@@ -131,6 +131,7 @@ function App() {
 
   return (
     <>
+
       <div className='flex justify-around text-center w-3/5 mx-auto my-4 bg-yellow-100 rounded-3xl'>
         <AddMovie onAddMovie={addmovieHandler}/>
       </div>

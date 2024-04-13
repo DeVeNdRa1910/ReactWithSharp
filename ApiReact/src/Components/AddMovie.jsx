@@ -6,7 +6,7 @@ function AddMovie(props) {
     const openingTextRef = useRef('');
     const releaseDateRef = useRef('');
 
-    function submitHandler(event) {
+    const submitHandler = (event) => {
         event.preventDefault();
 
         const movie = {
