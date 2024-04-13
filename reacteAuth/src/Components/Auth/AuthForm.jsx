@@ -1,4 +1,5 @@
-import React, { useState , useRef } from 'react'
+import React, { useState , useRef , useContext } from 'react'
+import AuthContext from '../../store/AuthContext';
 
 function AuthForm() {
 
@@ -6,8 +7,9 @@ function AuthForm() {
     const passwordRef = useRef("");
     const cpasswordRef = useRef("");
 
-    const [isPasswordMatch, setIsPasswordMatch] = useState("true")
+    const authCtx = useContext(AuthContext)
 
+    const [isPasswordMatch, setIsPasswordMatch] = useState("true")
 
     const [isLogin, setIsLogin] = useState(true);
 
@@ -24,20 +26,15 @@ function AuthForm() {
         const enteredPassword = passwordRef.current.value;
         const enteredCpassword = cpasswordRef.current.value;
         
-        if(enteredPassword === enteredCpassword){
-            
             setIsPasswordMatch(true);
 
             setLoading(true);
 
             if(isLogin){
                 // fetch the user from db and match
-            }else{
 
-                // create user and post
-
-                fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAZ2nR6vMCbtELaNu1dtkSZnHeNlR9MAzM', {
-                    method:'POST',
+                fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAZ2nR6vMCbtELaNu1dtkSZnHeNlR9MAzM",{
+                    method: 'POST',
                     body: JSON.stringify({
                         email: enteredEmail,
                         password: enteredPassword,
@@ -47,29 +44,67 @@ function AuthForm() {
                         'Content-Type' : 'application/json'
                     }
                 }).then(resp => {
-
                     setLoading(false);
-
                     if(resp.ok){
                         // ...
-    
+                        return resp.json();
                     }else{
                         return resp.json().then(data => {
                             // show an error modal
                             let errorMessage = 'Authentication failed!'
-                            if(data && data.error && data.error.message){
+                            /* if(data && data.error && data.error.message){
                                 errorMessage = data.error.message;
-                            }
-                            alert(errorMessage)
-                            console.log(data)
+                            }*/
+                            throw new Error(errorMessage)
                         })
                     }
-                    
-                }).then()
+                }).then(data=>{
+                    console.log(data);
+                    authCtx.login(data.idToken);
+                }).catch(error => {
+                    alert(error)
+                })
+
+            }else{
+                if(enteredPassword === enteredCpassword){
+                    // create user and post
+
+                    fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAZ2nR6vMCbtELaNu1dtkSZnHeNlR9MAzM', {
+                        method:'POST',
+                        body: JSON.stringify({
+                            email: enteredEmail,
+                            password: enteredPassword,
+                            returnSecureToken: true
+                        }),
+                        headers: {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then(resp => {
+                        setLoading(false);
+                        if(resp.ok){
+                            // ...
+                            return resp.json();
+                        }else{
+                            return resp.json().then(data => {
+                                // show an error modal
+                                let errorMessage = 'Authentication failed!'
+                                /* if(data && data.error && data.error.message){
+                                    errorMessage = data.error.message;
+                                }*/
+                                throw new Error(errorMessage)
+                            })
+                        }
+                    }).then(data=>{
+                        console.log(data);
+                        authCtx.login(data.idToken)
+                    }).catch(error => {
+                        alert(error)
+                    })
+                }else{
+                    setIsPasswordMatch(false);
+                }
             }
-        }else{
-            setIsPasswordMatch(false);
-        }
+        
     }
 
   return (
@@ -86,7 +121,7 @@ function AuthForm() {
             </div>
             {!isLogin && <div className='mb-2'>
                 <label className='block text-white font-bold mb-2' htmlFor="confirm-password">Confirm Password</label>
-                <input ref={cpasswordRef} className='text-inherit bg-white text-purple-950 border rounded-lg border-white w-full text-left p-1' type="password" id="password" required />
+                <input ref={cpasswordRef} className='text-inherit bg-white text-purple-950 border rounded-lg border-white w-full text-left p-1' type="password" id="cpassword" required />
             </div>}
             
             <div className='mt-6 flex flex-col items-center'>
