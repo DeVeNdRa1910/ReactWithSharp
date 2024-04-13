@@ -1,13 +1,13 @@
 import React, { useState , useRef , useContext } from 'react'
-import AuthContext from '../../store/AuthContext';
+import AuthContext from '../../store/AuthContext.jsx';
 
 function AuthForm() {
 
-    const emailRef = useRef("");
-    const passwordRef = useRef("");
-    const cpasswordRef = useRef("");
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+    const cpasswordRef = useRef(null);
 
-    const authCtx = useContext(AuthContext)
+    const authCtx = useContext(AuthContext);
 
     const [isPasswordMatch, setIsPasswordMatch] = useState("true")
 
@@ -60,7 +60,7 @@ function AuthForm() {
                     }
                 }).then(data=>{
                     console.log(data);
-                    authCtx.login(data.idToken);
+                    authCtx.login(data.idToken)
                 }).catch(error => {
                     alert(error)
                 })
