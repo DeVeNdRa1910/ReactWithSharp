@@ -7,7 +7,7 @@ const CandidateContext = React.createContext({
             candidateId: 11
         },
         {
-            name: "Deepak",
+            name: "Divyanshi",
             candidateId: 22
         },
         {
