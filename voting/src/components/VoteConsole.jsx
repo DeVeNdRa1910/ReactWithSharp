@@ -18,16 +18,20 @@ function VoteConsole(props) {
         const candidate = parseInt(candidateIdRef.current.value);
         const voterId = voter+candidate
         const rollNoInput = parseInt(voterRollRef.current.value);
+
         if(voter===""){
             alert("Please Enter Valid Name");
             return;
         }
+
         const rollNoList = voteCtx.votes.map(item => item.rollNo);
         if(rollNoList.includes(rollNoInput)){
             alert("You was already voted");
             voterRollRef.current.value= parseInt("");
+            voterNameRef.current.value= "";
             return;
         }
+
         voterRollRef.current.value= parseInt("");
         voterNameRef.current.value= "";
 

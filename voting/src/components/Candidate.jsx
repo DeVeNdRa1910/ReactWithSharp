@@ -11,17 +11,17 @@ function Candidate() {
 
   return (
     <CandidateContextProvider>
-      <ul>
+      <ul className='grid gap-x-4 sm:grid-cols-3 mt-10'>
         {
           candidateCtx.candidates.map(candidate => {
             const totalVotes = voteCtx.votes.filter(vote => vote.candidateId === candidate.candidateId);
             console.log(totalVotes);
             console.log("number of total votes for ",candidate.name, "is" , totalVotes.length);
             return (
-                    <div key={candidate.candidateId} className='border-b-2 border-black mx-3'>
+                    <div key={candidate.candidateId} className=' mx-5'>
                       <li  className='list-none pl-5 py-1'>
                           <h1 className='text-3xl font-bold'>{candidate.name}</h1>
-                          <h3 className='text-xl font-semibold'>Total Votes : {totalVotes.length}</h3>
+                          <h3 className='text-xl font-semibold'>Votes : {totalVotes.length}</h3>
                       </li>
                       <ul className='pb-1'>
                         {
