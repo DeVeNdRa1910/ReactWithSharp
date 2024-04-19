@@ -31,8 +31,8 @@ function AuthForm() {
             fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAZ2nR6vMCbtELaNu1dtkSZnHeNlR9MAzM", {
                 method: 'POST',
                 body: JSON.stringify({
-                    email: enteredEmail,
-                    password: enteredPassword,
+                        email: enteredEmail,
+                        password: enteredPassword,
                         returnSecureToken: true
                     }),
                     headers: {
@@ -58,8 +58,8 @@ function AuthForm() {
             fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAZ2nR6vMCbtELaNu1dtkSZnHeNlR9MAzM', {
                 method: 'POST',
                 body: JSON.stringify({
-                    email: enteredEmail,
-                    password: enteredPassword,
+                        email: enteredEmail,
+                        password: enteredPassword,
                         returnSecureToken: true
                     }),
                     headers: {

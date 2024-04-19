@@ -3,12 +3,17 @@ import About from './Components/about/About'
 import Home from './Home'
 import Music from './Components/Music/Music'
 import ContactUs from './Components/ContactUs/ContactUs'
+import { AuthContextProvider } from './store/AuthContext'
+import AuthForm from './Components/Auth/AuthForm'
+import UserProfile from './Components/Profile/UserProfile'
 
 const router = createBrowserRouter([
   {path: '/about', element: <About />},
-  {path: '/', element: <Home />},
+  {path: '/home', element: <Home />},
   {path: '/music', element: <Music />},
-  {path: '/contactUs', element: <ContactUs />}
+  {path: '/contactUs', element: <ContactUs />},
+  {path: '/', element: <AuthForm />},
+  {path: '/profile', element: <UserProfile />},
 ])
 
 
@@ -28,9 +33,9 @@ const router = createBrowserRouter([
 function Rout () {
 
     return (
-        <div>
+        <AuthContextProvider>
           <RouterProvider router={router} />
-        </div>
+        </AuthContextProvider>
     )
 }
 

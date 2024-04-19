@@ -5,6 +5,7 @@ import Header from './Components/UI/Header'
 import CartContextProvider from './store/Cart/CartProvider'
 import Cart from './Components/Cart/Cart'
 import Footer from './Components/UI/Footer'
+import AuthContextProvider from './store/AuthContext'
 
 function Home() {
   
@@ -20,19 +21,19 @@ function Home() {
 
   return (
       <CartContextProvider>
-        <div className=''>
-          <div className="flex justify-center items-center">
-            {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
+          <div className=''>
+            <div className="flex justify-center items-center">
+              {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
+            </div>
+            <Header onShowCart={showCartHandler}/>
           </div>
-          <Header onShowCart={showCartHandler}/>
-        </div>
-        <div className='bg-gray-600 text-white'>
-          <h1 className='text-white py-10 pt-10 text-8xl text-center'>The Generics</h1>
-        </div>
-        <main className='z-0'>
-          < AvailableProduct />
-        </main>
-        <Footer />
+          <div className='bg-gray-600 text-white'>
+            <h1 className='text-white py-10 pt-10 text-8xl text-center'>The Generics</h1>
+          </div>
+          <main className='z-0'>
+            < AvailableProduct />
+          </main>
+          <Footer />
       </CartContextProvider>
   )
 }

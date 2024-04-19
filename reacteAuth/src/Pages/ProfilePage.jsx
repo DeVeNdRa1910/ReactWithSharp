@@ -1,9 +1,9 @@
 import React from 'react'
-import UserProfile from '../Components/Profile/UserProfile'
+import Home from '../../src/'
 
 function ProfilePage() {
   return (
-    <UserProfile />
+    <Home />
   )
 }
 
