@@ -41,7 +41,10 @@ function SignIn() {
                 <input className='rounded-md px-8 p-1 bg-stone-800' ref={passwordRef} type="text" placeholder='Enter your password'/>
             </div>
            <div className='flex justify-center items-center'>
-                <button className='bg-black w-1/4 px-8 py-2 rounded-lg border hover:border-blue-700' onClick={clickHandler}>SignIn</button>
+                <button className='text-xl bg-black w-1/2 px-16 py-2 rounded-lg border hover:border-blue-700' onClick={clickHandler}>SignIn</button>
+           </div>
+           <div className='flex justify-center items-center'>
+                <button className='mt-4 text-xl text-blue-600 hover:underline'>Forgot Password</button>
            </div>
         </div>
     </div>
