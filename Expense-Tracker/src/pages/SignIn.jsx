@@ -2,10 +2,13 @@ import React from 'react'
 import { useRef } from 'react'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import firebaseApp from '../Firebase'
+import { useNavigate } from 'react-router-dom'
 
 const auth = getAuth(firebaseApp)
 
 function SignIn() {
+
+    const navigate = useNavigate()
 
     const emailRef = useRef("")
     const passwordRef = useRef("")
@@ -17,16 +20,17 @@ function SignIn() {
 
         try{
             const resp = await signInWithEmailAndPassword(auth, email, password)
-            if(resp.ok){
-                console.log(resp);
-                emailRef.current.value = "";
-                passwordRef.current.value = "";
-            }else{
-                throw new Error("Something went wrong!!")
-            }
-        } catch(error) {
-            alert(error.message)
+            
+            console.log(resp);
+            emailRef.current.value = "";
+            passwordRef.current.value = "";
+            
+        } catch(err) {
+            console.error(err);
         }
+
+        navigate('/loginscreen')
+
     }
 
   return (
