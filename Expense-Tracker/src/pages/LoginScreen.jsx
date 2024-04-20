@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
-import { getAuth, updateProfile } from 'firebase/auth'
+import { getAuth, updateProfile, sendEmailVerification , signOut} from 'firebase/auth'
 import firebaseApp from '../Firebase'
 import { useNavigate } from 'react-router-dom';
+
 
 const auth = getAuth(firebaseApp);
 
@@ -14,6 +15,30 @@ function LoginScreen() {
 
     const nameRef = useRef("")
     const photoRef = useRef("")
+
+    const user = auth.currentUser;
+    //const uid = user.uid;
+
+
+    if (user !== null) {
+        user.providerData.forEach((profile) => {
+            console.log("Sign-in provider: " + profile.providerId);
+            console.log("  Provider-specific UID: " + profile.uid);
+            console.log("  Name: " + profile.displayName);
+            console.log("  Email: " + profile.email);
+            console.log("  Photo URL: " + profile.photoURL);
+            console.log("  UID: " + profile.uid);
+
+            // nameRef.current.value = profile.displayName
+            // photoRef.current.value = profile.photoURL
+
+        });
+    }
+
+    console.log( "user inside login screen",user);
+
+
+
 
     const navigate = useNavigate()
 
@@ -41,10 +66,23 @@ function LoginScreen() {
         setShowButton(flase)
     }
 
+    const verifyEmailHandler = () => {
+        sendEmailVerification(auth.currentUser).then(resp => {
+            alert("Email has bee sended");
+        })
+    }
+
+    const logoutHandler = () =>{
+        signOut(auth)
+        navigate('/')
+    }
+
   return (
     <div className='w-full top-0 py-4'>
         <nav className='flex justify-between px-8'>
             <h1 className='text-xl'>Welcome to the Expense Tracker!!!</h1>
+            <button className='border border-white bg-black text-white py-1 px-4 rounded-xl' onClick={verifyEmailHandler}>Verify Email</button>
+            <button  className='bg-black px-4 py-1 rounded-xl border border-white hover:border-red-700' onClick={logoutHandler}>Logout</button>
             {showButton ? <h6 className='italic text-xl'>Your Profile is Incolmplete <button className='text-blue-600' onClick={clickHandler}>Complete Now</button> </h6> : <h6>!!!</h6>}
         </nav>
         
