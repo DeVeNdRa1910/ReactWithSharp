@@ -36,8 +36,8 @@ function Home() {
             return (
                 <>
                     <SignIn/>
-                    <div>
-                        <button onClick={()=>{setHaveAccount(false)}}>Haven't Account? Create</button>
+                    <div className='flex justify-center items-center py-8'>
+                        <button className='text-2xl hover:text-blue-600' onClick={()=>{setHaveAccount(false)}}>Haven't Account? Create</button>
                     </div>
                 </>
             )
@@ -49,9 +49,13 @@ function Home() {
     }else{
         return (
             <>
-                <div> Hello </div>
+                <div  className='flex justify-center items-end top-0 mt-4'>
+                    <button  className='bg-black w-1/4 px-8 py-2 rounded-lg border hover:border-red-700' onClick={()=>signOut(auth)}>Logout</button>
+                </div>
+                <p className='mt-20 flex justify-center items-center'>
+                    <div className=''> Hello </div>
+                </p>
                 {console.log(user)}
-                <button onClick={()=>signOut(auth)}>Logout</button>
             </>
         )
     }
