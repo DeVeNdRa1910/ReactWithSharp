@@ -5,6 +5,13 @@ import { useRef } from "react";
 
 // import { INCREMENT, DECREMENT } from "../store";
 
+
+
+
+// for Slice
+
+import { counterActions } from "../store/index";
+
 function Counter() {
 
     const inputRef = useRef(0);
@@ -16,25 +23,28 @@ function Counter() {
     const show = useSelector(state => state.showCounter)
 
     const incrementHandler = () => {
-        dispatch({type: 'increment'})
+        dispatch(counterActions.increment())
     }
 
     const decrementHandler = () => {
-        dispatch({type: 'decrement'})
+        dispatch(counterActions.decrement())
     }
 
     const decreaseHandler = () => {
         let inputNumber = parseInt(inputRef.current.value);
-        return dispatch({type: 'decrease', amount: inputNumber})
+        dispatch(counterActions.increase(inputNumber))
+        //here this argument (inputNumber) store in action as name of payload
+        //return dispatch({type: increase, amount: inputNumber})
     }
-
+    
     const increaseHandler = () => {
         let inputNumber = parseInt(inputRef.current.value);
-        return dispatch({type: 'increase', amount: inputNumber})
+        dispatch(counterActions.decrease(inputNumber))
+        //return dispatch({type: decrease, amount: inputNumber})
     }
 
     const toggleCounterHandler = () => {
-        dispatch({type: 'toggle'})
+        dispatch(counterActions.toggleCounter())
     };
 
   return (

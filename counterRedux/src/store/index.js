@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
 
 const initialState = {
     counter: 0,
@@ -29,12 +29,12 @@ const counterSlice = createSlice({
         },
         //yaha pr action ki jarurat thi last two method me action ki jarurat nhi thi kyuki 1 badana ya ghatana tha But increase or decrease me kitna add ya substract karna hai nahi pata to action ki need to hogi hi.
         increase(state, action) {
-            state.counter = state.counter+action.amount;
+            state.counter = state.counter+action.payload;
         },
         decrease(state, action) {
-            state.counter = state.counter-action.amount;
+            state.counter = state.counter-action.payload;
         },
-        toggleCount(state) {
+        toggleCounter(state) {
             state.showCounter = !state.showCounter;
         }
     }
@@ -53,9 +53,27 @@ const store = configureStore({
 });
 */
 
+
 const store = configureStore({
     reducer: counterSlice.reducer
 });
+//Now we have to export actions
+// redux toolkit export actions but default to avoide typo
+export const counterActions = counterSlice.actions 
+
+
+export default store;
+
+
+
+
+
+
+
+
+
+
+
 
 
 // const counterReducer = (state = initialState, action) => {
@@ -101,4 +119,4 @@ const store = configureStore({
 
 // const store = createStore(counterReducer);
 
-export default store;
+// export default store;
