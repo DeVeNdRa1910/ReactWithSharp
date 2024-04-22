@@ -34,7 +34,7 @@ function LoginScreen() {
         });
     } */
 
-    console.log( "user inside login screen",user);
+    // console.log( "user inside login screen",user);
 
     const navigate = useNavigate()
 
