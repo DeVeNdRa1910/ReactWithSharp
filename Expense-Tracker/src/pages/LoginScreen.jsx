@@ -2,11 +2,10 @@ import React, { useState, useRef } from 'react'
 import { getAuth, updateProfile, sendEmailVerification , signOut} from 'firebase/auth'
 import firebaseApp from '../Firebase'
 import { useNavigate } from 'react-router-dom';
-
+import Expenses from './Expenses';
+import ExpenseList from './ExpenseList';
 
 const auth = getAuth(firebaseApp);
-
-
 
 function LoginScreen() {
 
@@ -20,7 +19,7 @@ function LoginScreen() {
     //const uid = user.uid;
 
 
-    if (user !== null) {
+/*     if (user !== null) {
         user.providerData.forEach((profile) => {
             console.log("Sign-in provider: " + profile.providerId);
             console.log("  Provider-specific UID: " + profile.uid);
@@ -33,12 +32,9 @@ function LoginScreen() {
             // photoRef.current.value = profile.photoURL
 
         });
-    }
+    } */
 
     console.log( "user inside login screen",user);
-
-
-
 
     const navigate = useNavigate()
 
@@ -55,9 +51,9 @@ function LoginScreen() {
             displayName: name,
             photoURL: photo,
         }).then(resp => {
-            console.log(resp);
+            // console.log(resp);
             alert("Profile Updated successfully!!")
-            emailRef.current.value = "";
+            nameRef.current.value = "";
             passwordRef.current.value = "";
         }).catch(err=>{
             console.error(err);
@@ -77,11 +73,16 @@ function LoginScreen() {
         navigate('/')
     }
 
+    const resetPasswordHandler = () => {
+        navigate('/resetpassword')
+    }
+
   return (
     <div className='w-full top-0 py-4'>
         <nav className='flex justify-between px-8'>
             <h1 className='text-xl'>Welcome to the Expense Tracker!!!</h1>
             <button className='border border-white bg-black text-white py-1 px-4 rounded-xl' onClick={verifyEmailHandler}>Verify Email</button>
+            <button className='border border-white bg-black text-white py-1 px-4 rounded-xl' onClick={resetPasswordHandler}>Reset Password</button>
             <button  className='bg-black px-4 py-1 rounded-xl border border-white hover:border-red-700' onClick={logoutHandler}>Logout</button>
             {showButton ? <h6 className='italic text-xl'>Your Profile is Incolmplete <button className='text-blue-600' onClick={clickHandler}>Complete Now</button> </h6> : <h6>!!!</h6>}
         </nav>
@@ -108,6 +109,9 @@ function LoginScreen() {
                 </div>
             </div>
         }
+
+        <Expenses />
+        <ExpenseList />
     </div>
   )
 }

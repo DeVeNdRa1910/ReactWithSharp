@@ -2,10 +2,13 @@ import React from 'react'
 import { useRef } from 'react'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import firebaseApp from '../Firebase'
+import { useNavigate } from 'react-router-dom'
 
 const auth = getAuth(firebaseApp)
 
 function SignUp() {
+
+    const navigate = useNavigate()
 
     const emailRef = useRef("")
     const passwordRef = useRef("")
@@ -25,6 +28,9 @@ function SignUp() {
         } else {
             alert("Password and Confirm-Password must be same")
         }
+
+        navigate('/')
+
     }
 
   return (

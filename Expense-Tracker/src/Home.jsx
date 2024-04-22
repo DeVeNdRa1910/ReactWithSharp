@@ -9,7 +9,7 @@ const auth = getAuth(firebaseApp);
 
 function Home() {
 
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
 
     const [haveAccount, setHaveAccount] = useState(true)
 
@@ -43,19 +43,21 @@ function Home() {
             )
         }else{
             return(
-                <SignUp />
+                <>
+                    <SignUp />
+                    <div className='flex justify-center items-center py-8'>
+                        <button className='text-2xl hover:text-blue-600' onClick={()=>{setHaveAccount(true)}}>Login with existing Account</button>
+                    </div>
+                </>
             )
         }
     }else{
         return (
             <>
-                <div  className='flex justify-center items-end top-0 mt-4'>
-                    <button  className='bg-black w-1/4 px-8 py-2 rounded-lg border hover:border-red-700' onClick={()=>signOut(auth)}>Logout</button>
+                <SignIn/>
+                <div className='flex justify-center items-center py-8'>
+                    <button className='text-2xl hover:text-blue-600' onClick={()=>{setHaveAccount(false)}}>Haven't Account? Create</button>
                 </div>
-                <p className='mt-20 flex justify-center items-center'>
-                    <div className=''> Hello </div>
-                </p>
-                {console.log(user)}
             </>
         )
     }
