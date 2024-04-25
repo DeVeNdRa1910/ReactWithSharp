@@ -10,17 +10,17 @@ import { useRef } from "react";
 
 // for Slice
 
-import { counterActions } from "../store/index";
-import { authActions } from "../store/index";
+import { counterActions } from "../store/Counter";
 
 
 function Counter() {
 
     const inputRef = useRef(0);
-    
-    console.log(typeof inputNumber);
 
     const dispatch = useDispatch();
+
+ 
+    //If we export more then one reducer
     const counter = useSelector(state => state.counter.counter);
 
     const show = useSelector(state => state.counter.showCounter);
@@ -35,12 +35,14 @@ function Counter() {
     
     const increaseHandler = () => {
         let inputNumber = parseInt(inputRef.current.value);
+        console.log(typeof inputNumber , " for increment");
         dispatch(counterActions.increase(inputNumber))
         //return dispatch({type: decrease, amount: inputNumber})
     };
 
     const decreaseHandler = () => {
-        let inputNumber = parseInt(inputRef.current.value);
+        let inputNumber = parseInt(inputRef.current.value , " for decrement");
+        console.log(typeof inputNumber);
         dispatch(counterActions.decrease(inputNumber)) // Corrected from increase to decrease
         //here this argument (inputNumber) store in action as name of payload
         //return dispatch({type: increase, amount: inputNumber})
