@@ -1,10 +1,5 @@
 // import { createStore } from 'redux'
 
-const initialState = {
-    counter: 0,
-    showCounter: true,
-}
-
 // identifire ke typing erro se bachne ke liye ham is file me ek variable banakar use export kar denge
 
 // export const INCREMENT = "increment";
@@ -15,24 +10,30 @@ const initialState = {
 //redux toolkit me hi redux included hota hai 
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 
+const initialCounterState = {
+    counter: 0,
+    showCounter: true,
+}
+
 const counterSlice = createSlice({
     name: 'counter',
-    initialState: initialState,
-    reducer: {
+    initialState: initialCounterState,
+    reducers: {
         //every method receive current state and action by default
         increment (state) {
-            // now it can allow to mutate the state
+            // It shows like we are mutate the state
+            // But internally rtk create a clone of this state after change then override it.
             state.counter++;
         },
         decrement (state) {
-            state.decrement--;
+            state.counter--;
         },
         //yaha pr action ki jarurat thi last two method me action ki jarurat nhi thi kyuki 1 badana ya ghatana tha But increase or decrease me kitna add ya substract karna hai nahi pata to action ki need to hogi hi.
         increase(state, action) {
-            state.counter = state.counter+action.payload;
+            state.counter = state.counter + action.payload;
         },
         decrease(state, action) {
-            state.counter = state.counter-action.payload;
+            state.counter = state.counter - action.payload;
         },
         toggleCounter(state) {
             state.showCounter = !state.showCounter;
@@ -40,11 +41,30 @@ const counterSlice = createSlice({
     }
 });
 
-// we can configure more then one slice reducer me hi objectpass karke
+const initialAuthState = {
+    isAuthenticated: false,
+}
 
+const authSlice = createSlice({
+    name: 'auth',
+    initialState: initialAuthState,
+    reducers: {
+        login(state) {
+            state.isAuthenticated = true;
+        },
+        logout(state) {
+            state.isAuthenticated = false;
+        }
+    }
+});
+
+
+
+// we can configure more then one slice reducer me hi objectpass karke
+ 
 /* 
 const store = configureStore({
-    reducer: {
+    reducers: {
         reducer1: reducer1Slice.reducer
         reducer2: reducer2Slice.reducer
         reducer3: reducer3Slice.reducer
@@ -54,13 +74,20 @@ const store = configureStore({
 */
 
 
-const store = configureStore({
-    reducer: counterSlice.reducer
-});
-//Now we have to export actions
-// redux toolkit export actions but default to avoide typo
-export const counterActions = counterSlice.actions 
 
+// you can call configure store only one but can create many number of slice
+
+export const store = configureStore({
+    reducer: {
+        counter: counterSlice.reducer,
+        auth: authSlice.reducer,
+    }
+});
+
+// Now we have to export actions
+// redux toolkit export actions but default to avoide typo
+export const counterActions = counterSlice.actions ;
+export const authActions = authSlice.actions;
 
 export default store;
 
