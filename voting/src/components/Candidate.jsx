@@ -15,8 +15,6 @@ function Candidate() {
         {
           candidateCtx.candidates.map(candidate => {
             const totalVotes = voteCtx.votes.filter(vote => vote.candidateId === candidate.candidateId);
-            console.log(totalVotesN);
-            console.log("number of total votes for ",candidate.name, "is" , totalVotes.length);
             return (
                     <div key={candidate.candidateId} className=' mx-5'>
                       <li  className='list-none pl-5 py-1'>

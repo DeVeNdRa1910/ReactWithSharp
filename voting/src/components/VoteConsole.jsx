@@ -41,13 +41,11 @@ function VoteConsole(props) {
             name: voter,
             candidateId: candidate
         }
-        console.log(voteCtx.votes);
-        voteCtx.addVote(newVote)
-        console.log(voteCtx.votes);
+        voteCtx.addVote(newVote);
     }
 
   return (
-    <div className='z-30 flex justify-around bg-gray-400 py-5 my-3 mx-10 border-2 border-black rounded-2xl'>
+    <div className='w-[90%] flex justify-around bg-gray-400 py-5 my-3 mx-10  border-2 border-black rounded-2xl fixed top-50 z-10'>
         <div>
             <input className='rounded-lg py-1 px-5' ref={voterNameRef} type="text" placeholder='Enter Your Name'/>
         </div>

@@ -16,7 +16,10 @@ const VoteContextProvider = ({ children }) => {
       const newVotes = votes.filter(vote => vote.voterId !== id)
       setVotes(newVotes)
     }
+    
   }
+
+  updateVote()
 
   return (
     <VoteContext.Provider value={voteCtx}>
