@@ -37,11 +37,12 @@ function Log() {
             <form onSubmit={signupHandler} className='flex flex-col w-full border border-white rounded-lg' >
                 <input ref={emailRef} required className='bg-stone-800 pt-2 pb-4 px-4 mt-5 mx-5 outline-none border border-white rounded-lg' type="email" placeholder='Email'/>
                 <input ref={passwordRef} required className='bg-stone-800 pt-2 pb-4 px-4 mt-5 mx-5 outline-none border border-white rounded-lg' type="test" placeholder='Password'/>
-                <button className='w-[85%] py-2 my-5 border border-stone-800 mx-auto rounded-lg hover:bg-blue-600' type='submit' >SignUp</button>
+                <button className='w-[85%] py-2 my-5 border border-stone-800 mx-auto rounded-lg hover:bg-blue-600' type='submit' >Login</button>
+                <a className='text-blue-500 text-xl text-center mb-5 hover:underline hover:text-blue-700' href="/forgot">Forgot Password</a>
             </form>
             <button onClick={()=>{navigate('/')}} className='w-full bg-stone-800 pt-2 pb-4 px-4 mt-5 text-xl outline-none border border-white rounded-lg'>Don't have any account? SignUp</button>
       </div>
-    </div>
+    </div> 
   )
 }
 

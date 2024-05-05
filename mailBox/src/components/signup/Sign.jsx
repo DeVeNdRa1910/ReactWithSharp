@@ -49,6 +49,7 @@ function Sign() {
                 <input ref={passwordRef} required className='bg-stone-800 pt-2 pb-4 px-4 mt-5 mx-5 outline-none border border-white rounded-lg' type="test" placeholder='Password'/>
                 <input ref={confirmPasswordRef} required className='bg-stone-800 pt-2 pb-4 px-4 mt-5 mx-5 outline-none border border-white rounded-lg' type="test" placeholder='Confirm Password'/>
                 <button className='w-[85%] py-2 my-5 border border-stone-800 mx-auto rounded-lg hover:bg-blue-600' type='submit' >SignUp</button>
+                <a className='text-blue-500 text-xl text-center mb-5 hover:underline hover:text-blue-700' href="/forgot">Forgot Password</a>
             </form>
             <button onClick={()=>{navigate('/login')}} className='w-full bg-stone-800 pt-2 pb-4 px-4 mt-5 text-xl outline-none border border-white rounded-lg'>Have an account? Login</button>
       </div>
