@@ -1,35 +1,27 @@
-import React, {useRef} from 'react'
-import Editor from './Editor'
+import React, { useEffect, useState } from 'react'
+import Header from '../Body/Header'
+import Left from '../Body/Left'
+import Compose from '../Body/Compose'
+import MailList from '../Body/MailList'
 
 function Home() {
 
-  const toRef = useRef("")
-  const subjectRef = useRef("")
-  const mailRef = useRef("")
+  const [showCompose, setShowCompose] = useState(false)
 
-  const submitHandler = () =>{
-    e.preventDefault();
-    const to = toRef.current.value;
-    const subject = subjectRef.current.value;
-    const mail = mailRef.current.value;
-    
-    console.log(to ,"ko", subject, "ke regarding" , mail , "bheja gaya");
+  const composeHandler = () => {
+    setShowCompose(prev => !prev);
   }
 
   return (
-    <div className='p-16'>
-        <form onSubmit={submitHandler}>
-          <div className=' flex border-b border-white pb-3 mt-5'>
-            <label className='text-zinc-500 text-2xl font-semibold pr-6 ' htmlFor="">To: </label>
-            <input className='w-full bg-transparent outline-none' type="email" />
-          </div>
-          <div className=' flex border-b border-white pb-3 mt-5'>
-            <label className='text-zinc-500 text-2xl font-semibold pr-6 ' htmlFor="Subject">Subject: </label>
-            <input className='w-full bg-transparent outline-none' type="text" />
-          </div>
-          <Editor />
-          <button className='bg-blue-600 hover:bg-blue-800 py-1 px-6 my-5 rounded-lg border border-white' type='submit'>send</button>
-        </form>
+    <div>
+        <div className='p-2 top-0 sticky z-10 h-full'>
+          <Header/>
+        </div>
+        <div className='flex justify-between'>
+          <Left handleCompose={composeHandler}/>
+          <MailList compose={showCompose}/>
+        </div>
+
     </div>
   )
 }
