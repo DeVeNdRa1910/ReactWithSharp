@@ -4,8 +4,19 @@ import JoditEditor from 'jodit-react'
 import { FaMinus } from "react-icons/fa6";
 import { LuMaximize2 } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
+import { useDispatch } from 'react-redux';
+import { closeSendMessage } from '../../store/features/MailSlice';
+import {doc, addDoc,  serverTimestamp, setDoc, collection } from 'firebase/firestore';
+import { db } from '../../FirebaseApp';
+import { getAuth } from 'firebase/auth';
+import firebaseApp from '../../FirebaseApp';
+
+const auth = getAuth(firebaseApp);
+
 
 function Compose() {
+
+    const dispatch = useDispatch()
 
     const editor = useRef(null);
     const [content, setContent] = useState("");
@@ -13,18 +24,66 @@ function Compose() {
     const toRef = useRef("")
     const subjectRef = useRef("")
 
-    const submitHandler = (e) => {
+    const closeMessage = () => {
+        dispatch(closeSendMessage())
+    }
+
+    const send = async (to, subject, mail, timeStamp) => {
+
+        const userDoc = doc(db, "Users", `${auth.currentUser?.email}` )
+        const messageRef = collection(userDoc, "Send") //creatging subCollection with the name Send
+
+        try {
+            // start code for send message
+            const resp = await addDoc(messageRef, {
+                to: to,
+                subject: subject,
+                mail: mail,
+                timestamp: timeStamp,
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const submitHandler = async (e) => {
         e.preventDefault();
         const to = toRef.current.value;
         const subject = subjectRef.current.value;
-        const mail = content;
+        const mail = editor.current.value;
+        const userDoc = doc(db, "Users", `${to}` )
+        const messageRef = collection(userDoc, "Inbox") //creatging subCollection with the name inbox
+        
+        const timeStamp = serverTimestamp()
 
-        console.log(to, "ko", subject, "ke regarding", mail, "bheja gaya");
+        try {
+            // start code for send message
+            const resp = await addDoc(messageRef, {
+                to: to,
+                subject: subject,
+                mail: mail,
+                timestamp: timeStamp,
+                sender: auth.currentUser?.displayName
+            })
+
+            send(to, subject, mail, timeStamp)
+            console.log(resp);
+
+        } catch (error) {
+            console.error(error);
+        }
+
+        dispatch(closeSendMessage())
+        alert("Email sent successfully")
+
 
         toRef.current.value = ""
         subjectRef.current.value = ""
         setContent("")
+
     }
+
+
 
     return (
 
@@ -35,9 +94,9 @@ function Compose() {
                         <h3>New Message</h3>
                     </div>
                     <div className='right flex gap-2 justify-between items-center '>
-                        <div className='hover:bg-stone-600 rounded-full p-1.5' ><FaMinus /></div>
-                        <div className='hover:bg-stone-600 rounded-full p-1.5' ><LuMaximize2 /></div>
-                        <div className='hover:bg-stone-600 rounded-full p-1.5' ><IoClose /></div>
+                        <button className='hover:bg-stone-600 rounded-full p-1.5' ><FaMinus /></button>
+                        <button className='hover:bg-stone-600 rounded-full p-1.5' ><LuMaximize2 /></button>
+                        <button className='hover:bg-stone-600 rounded-full p-1.5' onClick={closeMessage} ><IoClose /></button>
                     </div>
                 </div>
                 <div className='flex justify-center'>
@@ -55,11 +114,10 @@ function Compose() {
                                 <JoditEditor
                                     className='text-black my-3'
                                     ref={editor}
-                                    value={content}
-                                    onChange={newContent => setContent(newContent)}
+
                                 />
                             </div>
-                            <div className='flex justify-center'>
+                            <div className='flex justify-center mb-3'>
                                 <button className='bg-blue-600 hover:bg-blue-800 py-0.5 px-6 rounded-lg border border-white' type='submit'>SEND</button>
                             </div>
                            

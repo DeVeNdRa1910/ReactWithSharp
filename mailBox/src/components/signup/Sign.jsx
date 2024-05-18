@@ -1,10 +1,14 @@
 import React from 'react'
 import { useRef } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword ,GoogleAuthProvider} from "firebase/auth";
 import firebaseApp from '../../FirebaseApp';
 import { useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { setDoc } from 'firebase/firestore';
+import { db } from '../../FirebaseApp';
 
 const auth = getAuth(firebaseApp)
+const googleProvider = new GoogleAuthProvider(auth)
 
 function Sign() {
 
@@ -13,6 +17,31 @@ function Sign() {
     const emailRef = useRef("")
     const passwordRef = useRef("")
     const confirmPasswordRef = useRef("")
+
+    const addUser = async () => {
+      const userDoc = doc(db, "Users", `${auth.currentUser?.email}`)
+      try {
+        await setDoc(userDoc, {
+          username: auth.currentUser?.displayName,
+          email: auth.currentUser?.email,
+          id: auth.currentUser?.uid,
+        })
+      } catch (error) {
+        console.log(error);
+      }
+      return
+    }
+
+    const googleSignin = async () =>{
+      try {
+        await signInWithPopup(auth, googleProvider)
+        addUser()
+        navigate('/home')
+      } catch (error) {
+        console.log(error);
+      }
+      return;
+    }
 
     const signupHandler = async (e) => {
         e.preventDefault();
@@ -32,6 +61,7 @@ function Sign() {
             emailRef.current.value="";
             passwordRef.current.value="";
             confirmPasswordRef.current.value="";
+            addUser()
         }
 
         console.log("User has successfully signed up");
@@ -52,6 +82,7 @@ function Sign() {
                 <a className='text-blue-500 text-xl text-center mb-5 hover:underline hover:text-blue-700' href="/forgot">Forgot Password</a>
             </form>
             <button onClick={()=>{navigate('/login')}} className='w-full bg-stone-800 pt-2 pb-4 px-4 mt-5 text-xl outline-none border border-white rounded-lg'>Have an account? Login</button>
+            <button onClick={googleSignin} className='w-full pt-2 pb-4 px-4 mt-5 text-xl outline-none hover:text-blue-500 hover:underline '>SignIn with Google</button>
       </div>
     </div>
   )

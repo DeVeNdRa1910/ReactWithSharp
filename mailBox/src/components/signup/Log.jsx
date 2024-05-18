@@ -1,10 +1,11 @@
 import React from 'react'
 import { useRef } from 'react'
-import { getAuth, signInWithEmailAndPassword  } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword ,GoogleAuthProvider  } from 'firebase/auth'
 import firebaseApp from '../../FirebaseApp'
 import { useNavigate } from 'react-router-dom'
 
 const auth = getAuth(firebaseApp)
+const googleProvider = new GoogleAuthProvider(auth)
 
 function Log() {
 
@@ -30,6 +31,16 @@ function Log() {
 
     }
 
+    const googleSignin = async () =>{
+      try {
+        await signInWithPopup(auth, googleProvider)
+        navigate('/home')
+      } catch (error) {
+        console.log(error);
+      }
+      return
+    }
+
   return (
     <div className='flex justify-center items-center h-screen '>
       <div className=' w-[40%] p-10'>
@@ -41,6 +52,7 @@ function Log() {
                 <a className='text-blue-500 text-xl text-center mb-5 hover:underline hover:text-blue-700' href="/forgot">Forgot Password</a>
             </form>
             <button onClick={()=>{navigate('/')}} className='w-full bg-stone-800 pt-2 pb-4 px-4 mt-5 text-xl outline-none border border-white rounded-lg'>Don't have any account? SignUp</button>
+            <button onClick={googleSignin} className='w-full pt-2 pb-4 px-4 mt-5 text-xl outline-none hover:text-blue-500 hover:underline '>SignIn with Google</button>
       </div>
     </div> 
   )
