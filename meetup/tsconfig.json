@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/ui/Card.jsx", "components/meetups/NewMeetupForm.jsx", "components/meetups/MeetupList.jsx", "components/meetups/MeetupItem.jsx", "components/layout/MainNavigation.jsx", "components/layout/Layout.jsx", "src/app/home/page.jsx", "src/app/[meetupid]/page.jsx", "src/app/meetup/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/ui/Card.jsx", "components/meetups/NewMeetupForm.jsx", "components/meetups/MeetupList.jsx", "components/meetups/MeetupItem.jsx", "components/layout/MainNavigation.jsx", "components/layout/Layout.jsx", "src/app/home/page.jsx", "src/app/[meetupid]/page.jsx", "src/app/meetup/page.jsx", "src/app/page.jsx"],
   "exclude": ["node_modules"]
 }

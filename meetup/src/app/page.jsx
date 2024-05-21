@@ -1,6 +1,8 @@
+
 import React from 'react'
 import MeetupList from '../../../components/meetups/MeetupList'
 import Layout from '../../../components/layout/Layout'
+
 const Dummy_Meetups = [
   {
     "id": 1,
@@ -40,12 +42,34 @@ const Dummy_Meetups = [
 ]
 
 
-function page() {
-  return (
-    <Layout>
-      <MeetupList meetups={Dummy_Meetups} />
-    </Layout>
-  )
+function Page(props) {
+
+  /*   
+    const [loadedMeetup, setLoadedMeetup] = useState([])
+
+    useEffect(()=>{
+      //send http request and fetch data
+      setLoadedMeetup(Dummy_Meetups)
+    }, []) 
+  */
+
+    return (
+      <Layout>
+        <MeetupList meetups={props.meetups} />
+      </Layout>
+    );
+}
+
+export async function getStaticProps() {
+  // wait till data loading one data will loaded then this function will provide props to page() function
+  // this function  is not for client
+  // here we can do -> fetch data
+  return {
+    props: {
+      meetups: Dummy_Meetups
+    }
+  };
+  // we dont need to useState, useEffect in page function we provide data by props
 }
 
 export default page
