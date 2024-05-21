@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/ui/Card.jsx", "components/meetups/NewMeetupForm.jsx", "components/meetups/MeetupList.jsx", "components/meetups/MeetupItem.jsx", "components/layout/MainNavigation.jsx", "components/layout/Layout.jsx", "src/app/home/page.jsx", "src/app/[meetupid]/page.jsx", "src/app/meetup/page.jsx"],
+  "exclude": ["node_modules"]
+}
