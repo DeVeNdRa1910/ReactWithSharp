@@ -1,5 +1,8 @@
 import React from 'react'
 import MeetupDetails from  '../../../components/meetups/MeetupDetails'
+import { MongoClient } from 'mongodb'
+
+const connectionString = "mongodb+srv://devendra7:devendra2000@devendra7.opbisf9.mongodb.net/meetups?retryWrites=true&w=majority&appName=devendra7";
 
 function page() {
   //MeetupDetails Page
@@ -46,7 +49,12 @@ function page() {
     <div>
       {Dummy_Meetups.map(item => (
         <div key={item.id}>
-          <MeetupDetails image={item.image} title={item.title} address={item.address} description={item.description}/>
+          <MeetupDetails 
+            image={item.image} 
+            title={item.title} 
+            address={item.address} 
+            description={item.description}
+          />
         </div>
       ))}
     </div>
