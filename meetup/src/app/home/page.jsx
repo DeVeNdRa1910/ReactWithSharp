@@ -1,7 +1,7 @@
 import React from 'react'
 import MeetupList from '../../../components/meetups/MeetupList'
 import Layout from '../../../components/layout/Layout'
-
+import Head from 'next/head'
 const Dummy_Meetups = [
   {
     "id": 1,
@@ -57,9 +57,19 @@ export default async function Page() {
     console.log(resp);
     const meetups = resp.props.meetups
     return (
-      <Layout>
-        <MeetupList meetups={meetups} />
-      </Layout>
+      <>
+        <Head>
+          <title>NextJs Meetup</title>
+          <meta 
+            name='description'
+            content='Browser a huge list of highly active Next Meetup'
+          />
+        </Head>
+        <Layout>
+          <MeetupList meetups={meetups} />
+        </Layout>
+      </>
+     
     );
 }
 
