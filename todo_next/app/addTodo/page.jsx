@@ -1,55 +1,58 @@
-'use client'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-export default function page() {
+"use client";
 
-  const router = useRouter()
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+//adding data using mongoose
+export default function EditTopicForm({ id, title, description }) {
+  const [newTitle, setNewTitle] = useState(title);
+  const [newDescription, setNewDescription] = useState(description);
 
-  const [title, setTitle] = useState("")
-  const [desc, setDesc] = useState("")
+  const router = useRouter();
 
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!title || !desc){
-      alert("title and description are required")
-      return
-    }
+
     try {
-      const resp = await fetch('http://localhost:3000/api/todos', {
-        method: 'POST',
+      const res = await fetch(`http://localhost:3000/api/topics/${id}`, {
+        method: "PUT",
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
         },
-        body:JSON.stringify({
-          title: title,
-          description: desc
-        })
+        body: JSON.stringify({ newTitle, newDescription }),
       });
-      if(resp.ok){
-        router.push('/')
-      } else{
-        throw new Error("Unable to create TOdo")
+
+      if (!res.ok) {
+        throw new Error("Failed to update topic");
       }
+
+      router.refresh();
+      router.push("/");
     } catch (error) {
-      console.log(error.message)
+      console.log(error);
     }
-  }
+  };
 
   return (
-    <form className='flex flex-col ' onSubmit={handleSubmit}>
-      <input 
-        onChange={(e)=>{setTitle(e.target.value)}}
-        className=' rounded-lg border-2 border-zinc-700 px-8 py-2 outline-none '
-        type="text" 
-        placeholder='Add Todo Title'
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <input
+        onChange={(e) => setNewTitle(e.target.value)}
+        value={newTitle}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Title"
       />
-      <textarea  
-        onChange={(e)=>{setDesc(e.target.value)}}
-        className='mt-3 rounded-lg  border border-zinc-700 px-8 py-2 outline-none '
-        type="text" 
-        placeholder='Add Todo Description'
+
+      <input
+        onChange={(e) => setNewDescription(e.target.value)}
+        value={newDescription}
+        className="border border-slate-500 px-8 py-2"
+        type="text"
+        placeholder="Topic Description"
       />
-      <button type='submit' className='bg-green-600 font-bold text-white py-3 px-6 w-fit mt-3 rounded-md text-center'>Add TODO</button>
+
+      <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit">
+        Update Topic
+      </button>
     </form>
-  )
+  );
 }
