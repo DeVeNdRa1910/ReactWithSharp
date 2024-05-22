@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-function EditTodoForm({ id, title, description }) {
+export default function EditTodoForm({ id, title, description }) {
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
 
@@ -39,7 +39,7 @@ function EditTodoForm({ id, title, description }) {
         value={newTitle}
         className="border border-slate-500 px-8 py-2"
         type="text"
-        placeholder="Todo Title"
+        placeholder="Topic Title"
       />
 
       <input
@@ -47,14 +47,12 @@ function EditTodoForm({ id, title, description }) {
         value={newDescription}
         className="border border-slate-500 px-8 py-2"
         type="text"
-        placeholder="Todo Description"
+        placeholder="Topic Description"
       />
 
       <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit">
-        Edit Todo
+        Update Todo
       </button>
     </form>
   );
 }
-
-export default EditTodoForm

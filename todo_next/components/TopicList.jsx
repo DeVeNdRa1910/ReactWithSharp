@@ -34,7 +34,7 @@ async function TopicList() {
               <div>{item.description}</div>
             </div>
             <div className='flex justify-between gap-5 items-start'>
-              <RemoveBtn />
+              <RemoveBtn id={item._id}/>
               <Link href={`/editTodo/${item._id}`}>
                 <MdModeEditOutline size={24} />
               </Link>
