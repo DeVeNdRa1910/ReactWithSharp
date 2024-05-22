@@ -1,6 +1,6 @@
 import React from 'react'
-import MeetupList from '../../components/meetups/MeetupList'
-import Layout from '../../components/layout/Layout'
+import MeetupList from '../../../components/meetups/MeetupList'
+import Layout from '../../../components/layout/Layout'
 
 const Dummy_Meetups = [
   {
