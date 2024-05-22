@@ -2,6 +2,8 @@ import React from 'react'
 import MeetupDetails from  '../../../components/meetups/MeetupDetails'
 import { MongoClient } from 'mongodb'
 
+// bcz in new version nextjs defaul project app directory not support getStaticProps, getServerSideProps, getStaticPath...... that why i am not able to do that task not only this i am not able to compplete previous task
+
 const connectionString = "mongodb+srv://devendra7:devendra2000@devendra7.opbisf9.mongodb.net/meetups?retryWrites=true&w=majority&appName=devendra7";
 
 function page() {
