@@ -1,8 +1,11 @@
+'use client'
 import React from 'react'
 import RemoveBtn from './RemoveBtn'
+import { useState } from 'react';
 import { MdModeEditOutline } from "react-icons/md";
 import Link from 'next/link';
-import { Calistoga } from 'next/font/google';
+import { ImRadioUnchecked } from "react-icons/im";
+import { FaCheckCircle } from "react-icons/fa";
 
 const getTodos = async () => {
 
@@ -23,15 +26,36 @@ const getTodos = async () => {
 async function TopicList() {
 
   const {todos} = await getTodos()
+  const [checked, setChecked] = useState(false)
+
+  const checkHandler = () =>{
+    setChecked(prev => !prev)
+  }
 
   return (
     <>
+      <button onClick={checkHandler}>
+        {checked ? (<FaCheckCircle />) : (<ImRadioUnchecked />) }
+      </button>
+      
       {
         todos.map(item => (
           <div key={item._id} className='rounded-md p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start'>
             <div >
-              <h2 className='font-bold text-2xl' >{item.title}</h2>
-              <div>{item.description}</div>
+              {
+                checked ? (
+                  <>
+                    <h2 className= 'font-bold text-2xl truncate' >{item.title}</h2>
+                    <div className='truncate'>{item.description}</div>
+                  </>
+                ) : (
+                  <>
+                    <h2 className= 'font-bold text-2xl' >{item.title}</h2>
+                    <div>{item.description}</div>
+                  </>
+                )
+              }
+              
             </div>
             <div className='flex justify-between gap-5 items-start'>
               <RemoveBtn id={item._id}/>
