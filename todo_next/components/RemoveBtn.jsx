@@ -2,7 +2,7 @@
 import React from 'react'
 import { MdDelete } from "react-icons/md";
 import { useRouter } from 'next/navigation';
-
+// this component use to delte the unwanted todo 
 function RemoveBtn({id}) {
   const router = useRouter()
   const removeTodo = async () =>{
